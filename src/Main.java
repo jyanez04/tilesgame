@@ -1,18 +1,24 @@
 import javafx.application.Application;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 public class Main extends Application {
 
+    public static void main(String[] args) {
+        launch(args);
+    }
+
     @Override
     public void start(Stage primaryStage) throws Exception {
         primaryStage.setTitle("Tiles!");
+        Board gameBoard = new Board();
+        gameBoard.initBoard();
         Display display = new Display();
+        display.drawBoard(gameBoard.tileBoard);
 
-        primaryStage.setScene(new Scene(display.gridPane, 1500, 900, Color.BLACK));
+        primaryStage.setScene(new Scene(display.gridPane, 1500,
+                900, Color.BLACK));
         primaryStage.show();
 
     }
