@@ -12,7 +12,7 @@ public class Main extends Application {
         primaryStage.setTitle("Tiles!");
         Display display = new Display();
 
-        primaryStage.setScene(new Scene(display.tilePane, 1000, 800, Color.BLACK));
+        primaryStage.setScene(new Scene(display.gridPane, 1500, 900, Color.BLACK));
         primaryStage.show();
 
     }
