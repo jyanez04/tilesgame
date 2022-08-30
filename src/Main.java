@@ -11,11 +11,12 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+
         primaryStage.setTitle("Tiles!");
         Board gameBoard = new Board();
-        gameBoard.initBoard();
+        gameBoard.init();
         Display display = new Display();
-        display.drawBoard(gameBoard.tileBoard);
+        display.drawBoard(gameBoard);
 
         primaryStage.setScene(new Scene(display.gridPane, 1500,
                 900, Color.BLACK));

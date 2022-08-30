@@ -1,11 +1,8 @@
-import javafx.scene.Group;
 import javafx.scene.layout.GridPane;
-
-import java.util.ArrayList;
 
 public class Display {
 
-    GridPane gridPane;
+    public GridPane gridPane;
 
     public Display() {
         this.gridPane = new GridPane();
@@ -13,20 +10,15 @@ public class Display {
         gridPane.setVgap(7.5);
         gridPane.setHgap(7.5);
     }
-    public void drawBoard(ArrayList<Group> board) {
-        int i = 0;
-        int row = 0;
-        int col = 0;
-        for(Group tile : board) {
-            if(col % 6 == 0) {
-                row++;
-                col = 0;
-                GridPane.setConstraints(tile, col, row);
-            } else {
-                GridPane.setConstraints(tile, col, row);
+    public void drawBoard(Board board) {
+        int counter = 0;
+        for(int i = 0; i < board.numRows; i++) {
+            for(int j = 0; j < board.numCols; j++) {
+                GridPane.setConstraints(board.tiles.get(counter),
+                        j, i);
+                gridPane.getChildren().add(board.tiles.get(counter));
+                counter++;
             }
-            gridPane.getChildren().add(tile);
-            col++;
         }
     }
 }
