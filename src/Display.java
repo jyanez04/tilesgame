@@ -1,4 +1,7 @@
+import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
+
+import java.util.ArrayList;
 
 public class Display {
 
@@ -6,7 +9,8 @@ public class Display {
 
     public Display() {
         this.gridPane = new GridPane();
-        gridPane.setGridLinesVisible(true);
+        gridPane.setPadding(new Insets(10));
+        gridPane.setGridLinesVisible(false);
         gridPane.setVgap(7.5);
         gridPane.setHgap(7.5);
     }
@@ -14,9 +18,9 @@ public class Display {
         int counter = 0;
         for(int i = 0; i < board.numRows; i++) {
             for(int j = 0; j < board.numCols; j++) {
-                GridPane.setConstraints(board.tiles.get(counter),
+                GridPane.setConstraints(board.tiles.get(counter).getComponents(),
                         j, i);
-                gridPane.getChildren().add(board.tiles.get(counter));
+                gridPane.getChildren().add(board.tiles.get(counter).getComponents());
                 counter++;
             }
         }

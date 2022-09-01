@@ -1,25 +1,70 @@
+import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
+import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
 
-public class Tile extends Node {
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
-    Rectangle background;
-    Rectangle diamond;
-    Circle bullseye;
+public class Tile extends Group {
 
-    public Tile() {
-        this.background = new Rectangle();
-        this.diamond = new Rectangle();
-        this.bullseye = new Circle(5, Color.RED);
+    public ArrayList<Color> colorPalette = new ArrayList<>();
+    private Group components;
+    private Rectangle rect;
+    private Polygon dia;
+    private Circle circle;
+    private boolean isCleared;
 
-        this.background.setHeight(50.0);
-        this.background.setWidth(50.0);
-        this.background.setFill(Color.BLUE);
+    public Tile(Color rectColor, Color diaColor, Color circColor) {
 
-        this.diamond.setHeight(50.0);
-        this.diamond.setWidth(50.0);
-        this.diamond.setFill(Color.WHITE);
+        this.components = new Group();
+        this.rect = new Rectangle(
+                100,
+                100,
+                rectColor);
+
+        this.dia = new Polygon();
+        dia.getPoints().addAll(
+                rect.getWidth()/2, 0.0,
+                0.0, rect.getHeight()/2,
+                rect.getWidth()/2, rect.getHeight(),
+                rect.getWidth(), rect.getHeight()/2);
+        this.dia.setFill(diaColor);
+
+        this.circle = new Circle(
+                rect.getWidth()/2,
+                rect.getHeight()/2,
+                rect.getWidth()/5,
+                circColor);
+
+
+
+        components.getChildren().addAll(rect, dia, circle);
+    }
+
+    public Rectangle getRect() {
+        return rect;
+    }
+
+    public Polygon getDia() {
+        return dia;
+    }
+
+    public Circle getCircle() {
+        return circle;
+    }
+
+    public Group getComponents() {
+        return components;
+    }
+
+    public boolean isCleared() {
+        return isCleared;
+    }
+
+    public void setCleared(boolean cleared) {
+        isCleared = cleared;
     }
 }
