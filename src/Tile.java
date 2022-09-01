@@ -1,3 +1,4 @@
+import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
@@ -38,8 +39,6 @@ public class Tile extends Group {
                 rect.getHeight()/2,
                 rect.getWidth()/5,
                 circColor);
-
-
 
         components.getChildren().addAll(rect, dia, circle);
     }
