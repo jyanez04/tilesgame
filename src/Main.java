@@ -19,7 +19,7 @@ public class Main extends Application {
         display.drawBoard(gameBoard);
 
         primaryStage.setScene(new Scene(display.gridPane, 1500,
-                900, Color.BLACK));
+                700, Color.BLACK));
         primaryStage.show();
 
     }

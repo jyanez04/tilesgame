@@ -26,9 +26,8 @@ public class Tile extends Group {
 
         this.components = new Group();
         this.components.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            System.out.println(isSelected);
             isSelected = true;
-            System.out.println(isSelected);
+            Board.selected++;
         } );
     }
 

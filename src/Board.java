@@ -13,6 +13,7 @@ public class Board {
     public int numRows = 5;
     public int numCols = 6;
     public int size = numRows*numCols;
+    public static int selected = 0;
 
     public ArrayList<Color> rectPalette = new ArrayList<>();
     public ArrayList<Color> diamondPalette = new ArrayList<>();
@@ -59,6 +60,7 @@ public class Board {
             rectangles.add(newRect);
             rectangles.add(dupeRect);
         }
+        Collections.shuffle(rectangles);
 
         for(int i = 0; i < rectangles.size(); i++) {
             tiles.get(i).getComponents().getChildren().add(rectangles.get(i));
@@ -83,6 +85,7 @@ public class Board {
             diamonds.add(newDia);
             diamonds.add(dupeDia);
         }
+        Collections.shuffle(diamonds);
 
         for(int i = 0; i < diamonds.size(); i++) {
             tiles.get(i).getComponents().getChildren().add(diamonds.get(i));
@@ -102,6 +105,7 @@ public class Board {
             circles.add(newCirc);
             circles.add(dupeCirc);
         }
+        Collections.shuffle(circles);
         for(int i = 0; i < circles.size(); i++) {
             tiles.get(i).getComponents().getChildren().add(circles.get(i));
         }
