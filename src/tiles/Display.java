@@ -1,7 +1,8 @@
+package tiles;
+
 import javafx.geometry.Insets;
 import javafx.scene.layout.GridPane;
-
-import java.util.ArrayList;
+import tiles.Board;
 
 public class Display {
 
@@ -9,6 +10,7 @@ public class Display {
 
     public Display() {
         this.gridPane = new GridPane();
+        gridPane.setPrefSize(100, 100);
         gridPane.setPadding(new Insets(10));
         gridPane.setGridLinesVisible(false);
         gridPane.setVgap(7.5);

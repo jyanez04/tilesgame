@@ -1,7 +1,11 @@
+package tiles;
+
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
+import tiles.Tile;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
