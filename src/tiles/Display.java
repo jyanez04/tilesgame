@@ -20,9 +20,9 @@ public class Display {
         int counter = 0;
         for(int i = 0; i < board.numRows; i++) {
             for(int j = 0; j < board.numCols; j++) {
-                GridPane.setConstraints(board.tiles.get(counter).getComponents(),
+                GridPane.setConstraints(board.tiles.get(counter),
                         j, i);
-                gridPane.getChildren().add(board.tiles.get(counter).getComponents());
+                gridPane.getChildren().add(board.tiles.get(counter));
                 counter++;
             }
         }

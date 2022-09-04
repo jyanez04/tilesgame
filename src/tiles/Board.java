@@ -4,7 +4,6 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Rectangle;
-import tiles.Tile;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -17,7 +16,6 @@ public class Board {
     public int numRows = 5;
     public int numCols = 6;
     public int size = numRows*numCols;
-    public static int selected = 0;
 
     public ArrayList<Color> rectPalette = new ArrayList<>();
     public ArrayList<Color> diamondPalette = new ArrayList<>();
@@ -67,7 +65,8 @@ public class Board {
         Collections.shuffle(rectangles);
 
         for(int i = 0; i < rectangles.size(); i++) {
-            tiles.get(i).getComponents().getChildren().add(rectangles.get(i));
+            tiles.get(i).getChildren().add(rectangles.get(i));
+            tiles.get(i).getComponents().add(rectangles.get(i));
         }
 
         for(int i = 0; i < size/2; i++) {
@@ -92,7 +91,8 @@ public class Board {
         Collections.shuffle(diamonds);
 
         for(int i = 0; i < diamonds.size(); i++) {
-            tiles.get(i).getComponents().getChildren().add(diamonds.get(i));
+            tiles.get(i).getChildren().add(diamonds.get(i));
+            tiles.get(i).getComponents().add(diamonds.get(i));
         }
 
         for(int i = 0; i < size/2; i++) {
@@ -111,10 +111,11 @@ public class Board {
         }
         Collections.shuffle(circles);
         for(int i = 0; i < circles.size(); i++) {
-            tiles.get(i).getComponents().getChildren().add(circles.get(i));
+            tiles.get(i).getChildren().add(circles.get(i));
+            tiles.get(i).getComponents().add(circles.get(i));
         }
 
         Collections.shuffle(tiles);
-        System.out.println(tiles.get(0).getComponents().getChildren());
+        System.out.println(tiles.get(0).getChildren());
     }
 }

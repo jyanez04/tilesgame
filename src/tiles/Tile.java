@@ -2,30 +2,24 @@ package tiles;
 
 import javafx.scene.Group;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Polygon;
-import javafx.scene.shape.Rectangle;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Shape;
 
 import java.util.ArrayList;
 
 public class Tile extends Group {
 
-    public ArrayList<Color> colorPalette = new ArrayList<>();
-    private Group components;
-    private Rectangle rect;
-    private Polygon dia;
-    private Circle circle;
-    public static ArrayList<Group> selections = new ArrayList<>();
+    private ArrayList<Shape> components;
+    public static ArrayList<Tile> selections = new ArrayList<>();
     private boolean isCleared;
     boolean isSelected;
 
     public Tile() {
         isSelected = false;
+        this.components = new ArrayList<>();
 
-        this.components = new Group();
-        this.components.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
-            selections.add(this.components);
+        this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
+            selections.add(this);
             if(selections.size() == 2) {
                 matchTiles(selections);
             } else {
@@ -35,32 +29,21 @@ public class Tile extends Group {
         } );
     }
 
-    public static void matchTiles(ArrayList<Group> selections) {
+    public static void matchTiles(ArrayList<Tile> selections) {
         System.out.println("entered function");
-        Group selectedTile = selections.get(0);
-        Group targetTile = selections.get(1);
+        Tile selectedTile = selections.get(0);
+        Tile targetTile = selections.get(1);
         for(int i = 0; i < selectedTile.getChildren().size(); i++) {
-            if(selectedTile.getChildren().get(i).equals(targetTile.getChildren().get(i))) {
-                selectedTile.getChildren().remove(i);
-                targetTile.getChildren().remove(i);
+            if(selectedTile.getComponents().get(i).getFill().
+                    equals(targetTile.getComponents().get(i).getFill())) {
+                selectedTile.getComponents().get(i).setFill(Color.TRANSPARENT);
+                targetTile.getComponents().get(i).setFill(Color.TRANSPARENT);
             }
         }
         selections.clear();
     }
 
-    public Rectangle getRect() {
-        return rect;
-    }
-
-    public Polygon getDia() {
-        return dia;
-    }
-
-    public Circle getCircle() {
-        return circle;
-    }
-
-    public Group getComponents() {
+    public ArrayList<Shape> getComponents() {
         return components;
     }
 
