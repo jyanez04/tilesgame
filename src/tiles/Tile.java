@@ -12,25 +12,28 @@ public class Tile extends Group {
     private ArrayList<Shape> components;
     public static ArrayList<Tile> selections = new ArrayList<>();
     private boolean isCleared;
-    boolean isSelected;
+    public static int playerScore = 0;
+    public static int playerCombo = 0;
 
     public Tile() {
-        isSelected = false;
         this.components = new ArrayList<>();
 
         this.addEventHandler(MouseEvent.MOUSE_CLICKED, event -> {
             selections.add(this);
             if(selections.size() == 2) {
-                matchTiles(selections);
-            } else {
-                this.isSelected = true;
-
+                if(matchTiles(selections)) {
+                    Display.scoreBoard.setText("Score: " + ++playerScore);
+                    Display.combo.setText("Current combo: " + ++playerCombo);
+                } else {
+                    playerCombo = 0;
+                    Display.combo.setText("Current combo: " + playerCombo);
+                }
             }
         } );
     }
 
-    public static void matchTiles(ArrayList<Tile> selections) {
-        System.out.println("entered function");
+    public static boolean matchTiles(ArrayList<Tile> selections) {
+        boolean matched = false;
         Tile selectedTile = selections.get(0);
         Tile targetTile = selections.get(1);
         for(int i = 0; i < selectedTile.getChildren().size(); i++) {
@@ -38,9 +41,11 @@ public class Tile extends Group {
                     equals(targetTile.getComponents().get(i).getFill())) {
                 selectedTile.getComponents().get(i).setFill(Color.TRANSPARENT);
                 targetTile.getComponents().get(i).setFill(Color.TRANSPARENT);
+                matched = true;
             }
         }
         selections.clear();
+        return matched;
     }
 
     public ArrayList<Shape> getComponents() {

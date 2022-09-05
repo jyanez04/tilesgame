@@ -1,12 +1,17 @@
 package tiles;
 
 import javafx.geometry.Insets;
+import javafx.scene.control.Label;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
 import tiles.Board;
 
 public class Display {
 
-    public GridPane gridPane;
+    private GridPane gridPane;
+    public static Label scoreBoard = new Label("Score: " + Tile.playerScore);
+    public static Label combo = new Label("Current Combo: " + Tile.playerCombo);
 
     public Display() {
         this.gridPane = new GridPane();
@@ -17,6 +22,7 @@ public class Display {
         gridPane.setHgap(7.5);
     }
     public void drawBoard(Board board) {
+        gridPane.setBackground(Background.EMPTY);
         int counter = 0;
         for(int i = 0; i < board.numRows; i++) {
             for(int j = 0; j < board.numCols; j++) {
@@ -26,5 +32,15 @@ public class Display {
                 counter++;
             }
         }
+        scoreBoard.setTextFill(Color.WHITE);
+        combo.setTextFill(Color.WHITE);
+        GridPane.setConstraints(scoreBoard, board.numCols, board.numRows);
+        gridPane.getChildren().add(scoreBoard);
+        GridPane.setConstraints(combo, board.numCols, board.numRows+1);
+        gridPane.getChildren().add(combo);
+    }
+
+    public GridPane getGridPane() {
+        return gridPane;
     }
 }

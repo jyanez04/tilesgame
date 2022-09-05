@@ -114,8 +114,6 @@ public class Board {
             tiles.get(i).getChildren().add(circles.get(i));
             tiles.get(i).getComponents().add(circles.get(i));
         }
-
         Collections.shuffle(tiles);
-        System.out.println(tiles.get(0).getChildren());
     }
 }
