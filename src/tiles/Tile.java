@@ -14,6 +14,7 @@ public class Tile extends Group {
     private boolean isCleared;
     public static int playerScore = 0;
     public static int playerCombo = 0;
+    public static int longestCombo = 0;
 
     public Tile() {
         this.components = new ArrayList<>();
@@ -24,6 +25,10 @@ public class Tile extends Group {
                 if(matchTiles(selections)) {
                     Display.scoreBoard.setText("Score: " + ++playerScore);
                     Display.combo.setText("Current combo: " + ++playerCombo);
+                    if(playerCombo >= longestCombo) {
+                        longestCombo = playerCombo;
+                        Display.longestCombo.setText("Longest combo: " + longestCombo);
+                    }
                 } else {
                     playerCombo = 0;
                     Display.combo.setText("Current combo: " + playerCombo);
@@ -37,7 +42,10 @@ public class Tile extends Group {
         Tile selectedTile = selections.get(0);
         Tile targetTile = selections.get(1);
         for(int i = 0; i < selectedTile.getChildren().size(); i++) {
-            if(selectedTile.getComponents().get(i).getFill().
+            if(selectedTile.getComponents().get(i).getFill().equals(Color.TRANSPARENT) ||
+            targetTile.getComponents().get(i).getFill().equals(Color.TRANSPARENT)) {
+                matched = false;
+            } else if(selectedTile.getComponents().get(i).getFill().
                     equals(targetTile.getComponents().get(i).getFill())) {
                 selectedTile.getComponents().get(i).setFill(Color.TRANSPARENT);
                 targetTile.getComponents().get(i).setFill(Color.TRANSPARENT);
