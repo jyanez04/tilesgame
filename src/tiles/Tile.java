@@ -10,8 +10,8 @@ import java.util.ArrayList;
 public class Tile extends Group {
 
     private ArrayList<Shape> components;
-    public static ArrayList<Tile> selections = new ArrayList<>();
-    private boolean isCleared;
+    private static ArrayList<Tile> selections = new ArrayList<>();
+
     public static int playerScore = 0;
     public static int playerCombo = 0;
     public static int longestCombo = 0;
@@ -27,7 +27,8 @@ public class Tile extends Group {
                     Display.combo.setText("Current combo: " + ++playerCombo);
                     if(playerCombo >= longestCombo) {
                         longestCombo = playerCombo;
-                        Display.longestCombo.setText("Longest combo: " + longestCombo);
+                        Display.longestCombo.setText
+                                ("Longest combo: " + longestCombo);
                     }
                 } else {
                     playerCombo = 0;
@@ -37,18 +38,27 @@ public class Tile extends Group {
         } );
     }
 
+    /**
+     * This method takes a list of 2 tiles and sees if they have any matching
+     * components. If so, the method "removes" the components from both tiles
+     * (in other words, makes the components transparent).
+     * @param selections the list containing the 2 tiles to be compared
+     * @return true if any components matched, false if not
+     */
     public static boolean matchTiles(ArrayList<Tile> selections) {
         boolean matched = false;
         Tile selectedTile = selections.get(0);
         Tile targetTile = selections.get(1);
         for(int i = 0; i < selectedTile.getChildren().size(); i++) {
-            if(selectedTile.getComponents().get(i).getFill().equals(Color.TRANSPARENT) ||
-            targetTile.getComponents().get(i).getFill().equals(Color.TRANSPARENT)) {
-                matched = false;
-            } else if(selectedTile.getComponents().get(i).getFill().
-                    equals(targetTile.getComponents().get(i).getFill())) {
-                selectedTile.getComponents().get(i).setFill(Color.TRANSPARENT);
-                targetTile.getComponents().get(i).setFill(Color.TRANSPARENT);
+            if(selectedTile
+                    .components.get(i).getFill().equals(Color.TRANSPARENT) ||
+                    targetTile
+                    .components.get(i).getFill().equals(Color.TRANSPARENT)) {
+                continue;
+            } else if(selectedTile.components.get(i).getFill().
+                    equals(targetTile.components.get(i).getFill())) {
+                selectedTile.components.get(i).setFill(Color.TRANSPARENT);
+                targetTile.components.get(i).setFill(Color.TRANSPARENT);
                 matched = true;
             }
         }
@@ -58,13 +68,5 @@ public class Tile extends Group {
 
     public ArrayList<Shape> getComponents() {
         return components;
-    }
-
-    public boolean isCleared() {
-        return isCleared;
-    }
-
-    public void setCleared(boolean cleared) {
-        isCleared = cleared;
     }
 }

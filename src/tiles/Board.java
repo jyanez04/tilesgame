@@ -11,20 +11,21 @@ import java.util.Random;
 
 public class Board {
 
-    public ArrayList<Tile> tiles;
-    double tileSize = 100;
-    public int numRows = 5;
-    public int numCols = 6;
-    public int size = numRows*numCols;
+    private ArrayList<Tile> tiles;
+    private double tileSize = 100;
+    private int numRows = 5;
+    private int numCols = 6;
+    private int size = numRows*numCols;
 
-    public ArrayList<Color> rectPalette = new ArrayList<>();
-    public ArrayList<Color> diamondPalette = new ArrayList<>();
-    public ArrayList<Color> circlePalette = new ArrayList<>();
+    // color palettes to be used by the components of each tile
+    private ArrayList<Color> rectPalette = new ArrayList<>();
+    private ArrayList<Color> diamondPalette = new ArrayList<>();
+    private ArrayList<Color> circlePalette = new ArrayList<>();
 
-    Random rand = new Random();
+    private Random rand = new Random();
 
     public Board() {
-        this.tiles = new ArrayList<>();
+        tiles = new ArrayList<>();
 
         rectPalette.add(Color.rgb(205, 210, 203));
         rectPalette.add(Color.rgb(126, 147, 166));
@@ -40,6 +41,12 @@ public class Board {
         circlePalette.add(Color.rgb(38, 99, 94));
     }
 
+    /**
+     * This method initializes the game board by generating even amounts
+     * of components that share the same color. This way, each component of
+     * each tile can be matched with another component from a different tile.
+     * This algorithm ensures the board can be cleared in one unbroken streak.
+     */
     public void init() {
         for(int i = 0; i < size; i++) {
             Tile newTile = new Tile();
@@ -115,5 +122,17 @@ public class Board {
             tiles.get(i).getComponents().add(circles.get(i));
         }
         Collections.shuffle(tiles);
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
+
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public ArrayList<Tile> getTiles() {
+        return tiles;
     }
 }
